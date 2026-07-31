@@ -6,18 +6,18 @@ Construction sites are among the most hazardous workplaces due to unsafe practic
 
 There is a need for an intelligent solution that can quickly analyze construction site images, identify safety issues, and provide actionable recommendations to improve worker safety.
 
-## proposed solution
+## Proposed solution
 
 BuildSafe-AI is an AI-powered construction site safety inspection system that analyzes uploaded site images and automatically identifies potential safety hazards. The application uses Computer Vision and Generative AI to inspect construction environments, detect safety violations, and generate an easy-to-understand inspection report.
 
 The system provides:
 
-Detection of construction site safety issues.
-Identification of missing PPE such as helmets and safety vests.
-AI-generated safety analysis and recommendations.
-Safety score based on the overall site condition.
-Risk level classification (Low, Medium, High).
-Instant inspection report to support faster safety decisions.
+1)Detection of construction site safety issues.
+2)Identification of missing PPE such as helmets and safety vests.
+3)AI-generated safety analysis and recommendations.
+4)Safety score based on the overall site condition.
+5)Risk level classification (Low, Medium, High).
+6)Instant inspection report to support faster safety decisions.
 
 By automating the inspection process, BuildSafe-AI helps improve workplace safety, reduces manual effort, and enables quicker identification of hazardous situations.
 
