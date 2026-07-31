@@ -1,11 +1,17 @@
 const { analyzeEvidence } = require("../services/geminiService");
 const analyzeDecision = require("../utils/decisionGapEngine");
+const Inspection = require("../models/Inspection");
 
 const analyzeInspection = async (req, res) => {
   try {
     const { inspectionType, prompt } = req.body;
 
-    // Image path (if uploaded)
+    console.log("========== REQUEST ==========");
+    console.log("Inspection Type:", inspectionType);
+    console.log("Prompt:", prompt);
+    console.log("File:", req.file?.originalname);
+    console.log("=============================\n");
+
     const imagePath = req.file ? req.file.path : null;
 
     const geminiResponse = await analyzeEvidence(
@@ -14,37 +20,67 @@ const analyzeInspection = async (req, res) => {
       imagePath
     );
 
-    let detectedItems = [];
+    const cleanResponse = geminiResponse
+      .replace(/```json/gi, "")
+      .replace(/```/g, "")
+      .trim();
+
+    console.log("========== GEMINI RESPONSE ==========");
+    console.log(cleanResponse);
+    console.log("=====================================\n");
+
+    let parsed;
 
     try {
-      // Remove markdown code fences if Gemini returns them
-      const cleanResponse = geminiResponse
-        .replace(/```json/gi, "")
-        .replace(/```/g, "")
-        .trim();
-
-      console.log("\n===== CLEAN GEMINI RESPONSE =====");
-      console.log(cleanResponse);
-      console.log("=================================\n");
-
-      const parsed = JSON.parse(cleanResponse);
-
-      detectedItems = parsed.detectedItems || [];
+      parsed = JSON.parse(cleanResponse);
     } catch (err) {
-      console.error("\n===== RAW GEMINI RESPONSE =====");
-      console.error(geminiResponse);
-      console.error("================================\n");
+      console.error("❌ JSON Parse Error");
+      console.error(err);
 
       return res.status(500).json({
         success: false,
-        message: "Invalid JSON response from Gemini",
+        message: "Invalid JSON returned by Gemini",
       });
     }
+
+    const detectedItems = parsed.detectedItems || [];
 
     const result = analyzeDecision(
       inspectionType,
       detectedItems
     );
+
+    console.log("========== DECISION ENGINE ==========");
+    console.log(result);
+    console.log("=====================================\n");
+
+    try {
+      const savedInspection = await Inspection.create({
+        inspectionType: result.inspectionType,
+        compliance: Number(result.compliance),
+        requiredItems: result.requiredItems || [],
+        detectedItems: result.detectedItems || [],
+        missingItems: result.missingItems || [],
+        risk: {
+          level: result.risk?.level || "Low",
+          score: Number(result.risk?.score || 0),
+        },
+        imageName: req.file?.originalname || "",
+      });
+
+      console.log("✅ Saved to MongoDB");
+      console.log(savedInspection);
+
+    } catch (dbError) {
+      console.error("❌ DATABASE ERROR");
+      console.error(dbError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Database save failed",
+        error: dbError.message,
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -52,7 +88,9 @@ const analyzeInspection = async (req, res) => {
     });
 
   } catch (error) {
+    console.error("❌ BACKEND ERROR");
     console.error(error);
+    console.error(error.stack);
 
     return res.status(500).json({
       success: false,
