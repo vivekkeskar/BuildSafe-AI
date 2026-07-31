@@ -1,6 +1,25 @@
 # 🦺 BuildSafe-AI
 
-An AI-powered construction site safety inspection platform that analyzes construction site observations using Google Gemini AI.
+## Problem Statement
+
+Construction sites are among the most hazardous workplaces due to unsafe practices, improper use of Personal Protective Equipment (PPE), and delayed identification of potential risks. Manual safety inspections require significant time and continuous supervision, making it difficult to detect every violation in real time. This can lead to workplace accidents, injuries, and project delays.
+
+There is a need for an intelligent solution that can quickly analyze construction site images, identify safety issues, and provide actionable recommendations to improve worker safety.
+
+## proposed solution
+
+BuildSafe-AI is an AI-powered construction site safety inspection system that analyzes uploaded site images and automatically identifies potential safety hazards. The application uses Computer Vision and Generative AI to inspect construction environments, detect safety violations, and generate an easy-to-understand inspection report.
+
+The system provides:
+
+Detection of construction site safety issues.
+Identification of missing PPE such as helmets and safety vests.
+AI-generated safety analysis and recommendations.
+Safety score based on the overall site condition.
+Risk level classification (Low, Medium, High).
+Instant inspection report to support faster safety decisions.
+
+By automating the inspection process, BuildSafe-AI helps improve workplace safety, reduces manual effort, and enables quicker identification of hazardous situations.
 
 ## Features
 
