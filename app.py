@@ -1,6 +1,14 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
+
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
 
 @app.route("/")
 def home():
@@ -15,7 +23,10 @@ def analyze():
     if image.filename == "":
         return "No image selected"
 
-    # AI code will be added later
+    image_path = os.path.join(app.config["UPLOAD_FOLDER"], image.filename)
+
+    image.save(image_path)
+
     return "Image uploaded successfully."
 
 
