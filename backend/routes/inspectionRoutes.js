@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middlewares/upload");
 
 const {
   analyzeInspection,
@@ -6,6 +7,10 @@ const {
 
 const router = express.Router();
 
-router.post("/analyze", analyzeInspection);
+router.post(
+  "/analyze",
+  upload.single("image"),
+  analyzeInspection
+);
 
 module.exports = router;
