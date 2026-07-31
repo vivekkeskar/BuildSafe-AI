@@ -1,26 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildSafe-AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
 <body>
 
 <div class="container">
 
-    <h1>🏗️ BuildSafe-AI</h1>
+    <header>
 
-    <p>AI Powered Construction Site Safety Inspection</p>
+        <h1>🏗️ BuildSafe-AI</h1>
 
-    <input type="file" id="imageInput" accept="image/*">
+        <p class="subtitle">
+            AI Powered Construction Site Safety Inspection
+        </p>
 
-    <br><br>
+    </header>
 
-    <img id="preview" width="400" style="display:none;border-radius:10px;">
+    <div class="upload-box">
 
-    <br><br>
+        <h2>📤 Upload Construction Site Image</h2>
 
-    <button id="analyzeBtn">Analyze Site</button>
+        <p>
+            Upload an image from a construction site to check for safety risks and get an AI-generated inspection report.
+        </p>
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+        >
+
+        <div class="preview-box">
+
+            <img
+                id="preview"
+                src=""
+                alt="Image Preview"
+                style="display:none;"
+            >
+
+        </div>
+
+        <button id="analyzeBtn">
+            🔍 Analyze Site
+        </button>
+
+    </div>
 
     <div class="result">
 
-        <h2>Safety Report</h2>
+        <h2>📋 Safety Report</h2>
 
-        <p id="report">No analysis yet.</p>
+        <p id="report">
+            Upload an image and click <b>Analyze Site</b> to generate the inspection report.
+        </p>
 
     </div>
 
@@ -29,3 +68,4 @@
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
+</html>
