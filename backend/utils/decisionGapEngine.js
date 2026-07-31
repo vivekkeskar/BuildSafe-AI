@@ -1,27 +1,50 @@
 const checklists = require("./checklists");
 
 const synonymMap = {
-  helmet: "Safety Helmet",
+  // Helmet
+  "helmet": "Safety Helmet",
+  "hard hat": "Safety Helmet",
+  "hardhat": "Safety Helmet",
   "safety helmet": "Safety Helmet",
 
-  vest: "Safety Vest",
+  // Vest
+  "vest": "Safety Vest",
   "safety vest": "Safety Vest",
+  "high-visibility vest": "Safety Vest",
+  "high visibility vest": "Safety Vest",
+  "reflective vest": "Safety Vest",
+  "hi-vis vest": "Safety Vest",
 
-  shoes: "Safety Shoes",
+  // Shoes
+  "shoes": "Safety Shoes",
   "safety shoes": "Safety Shoes",
+  "boots": "Safety Shoes",
+  "work boots": "Safety Shoes",
+  "safety boots": "Safety Shoes",
 
-  gloves: "Safety Gloves",
+  // Gloves
+  "gloves": "Safety Gloves",
   "safety gloves": "Safety Gloves",
+  "work gloves": "Safety Gloves",
+  "protective gloves": "Safety Gloves",
 
-  goggles: "Safety Goggles",
+  // Goggles
+  "goggles": "Safety Goggles",
   "safety goggles": "Safety Goggles",
+  "safety glasses": "Safety Goggles",
+  "protective glasses": "Safety Goggles",
+  "eye protection": "Safety Goggles",
 };
 
 const normalizeItems = (items) => {
-  return items.map((item) => {
-    const key = item.toLowerCase().trim();
-    return synonymMap[key] || item;
-  });
+  return [
+    ...new Set(
+      items.map((item) => {
+        const key = item.toLowerCase().trim();
+        return synonymMap[key] || item;
+      })
+    ),
+  ];
 };
 
 const calculateRisk = (missingCount) => {
