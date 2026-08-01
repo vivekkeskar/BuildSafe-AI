@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.container h1 {
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.container p {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 14px;
+  border: 2px dashed #3b82f6;
+  border-radius: 12px;
+  background: #f8fbff;
+  cursor: pointer;
+}
+
+.preview {
+  width: 100%;
+  margin-top: 25px;
+  border-radius: 15px;
+  max-height: 450px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: .3s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.result-card {
+  margin-top: 35px;
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 6px solid #2563eb;
+}
+
+.result-card h2 {
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+.result-card h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #334155;
+}
+
+.result-card p {
+  text-align: left;
+  margin: 10px 0;
+  color: #0f172a;
+  font-size: 17px;
+}
+
+.result-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.result-card li {
+  background: white;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .container h1 {
+    font-size: 32px;
+  }
+
+  .container p {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}

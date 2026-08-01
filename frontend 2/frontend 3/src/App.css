@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f1f5f9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #0f172a;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.upload-card {
+  background: white;
+  border-radius: 20px;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+}
+
+.upload-card h2 {
+  font-size: 30px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.upload-text {
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.upload-card input[type="file"] {
+  width: 100%;
+  padding: 14px;
+  border: 2px dashed #3b82f6;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.preview {
+  width: 100%;
+  max-width: 550px;
+  border-radius: 15px;
+  border: 2px solid #e2e8f0;
+  margin-bottom: 25px;
+}
+
+.analyze-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.analyze-btn:hover {
+  background: #1d4ed8;
+}
+
+.analyze-btn:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.result-section {
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .upload-card {
+    padding: 20px;
+  }
+
+  .upload-card h2 {
+    font-size: 24px;
+  }
+
+  .preview {
+    max-width: 100%;
+  }
+
+  .analyze-btn {
+    width: 100%;
+  }
+}
+body{
+
+margin:0;
+
+font-family:'Inter',sans-serif;
+
+background:linear-gradient(135deg,#eef6ff,#ffffff,#eef2ff);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:500px;
+
+height:500px;
+
+background:#60a5fa33;
+
+filter:blur(120px);
+
+top:-120px;
+
+left:-100px;
+
+z-index:-1;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:450px;
+
+height:450px;
+
+background:#22c55e22;
+
+filter:blur(120px);
+
+bottom:-120px;
+
+right:-100px;
+
+z-index:-1;
+
+}

@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:#020617;
+  color:white;
+  font-family:Inter,sans-serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:#f9731630;
+  filter:blur(140px);
+  top:-120px;
+  left:-120px;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:#2563eb25;
+  filter:blur(140px);
+  bottom:-120px;
+  right:-120px;
+  z-index:-1;
+}

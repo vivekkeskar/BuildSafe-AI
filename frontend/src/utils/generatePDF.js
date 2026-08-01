@@ -11,6 +11,9 @@ export function generatePDF(result) {
     detectedItems,
     missingItems,
     risk,
+    executiveSummary = "",
+    hazards = [],
+    recommendations = [],
   } = result;
 
   // ===== Header =====
@@ -23,36 +26,21 @@ export function generatePDF(result) {
   doc.text("BuildSafe AI", 15, 15);
 
   doc.setFontSize(11);
+  doc.setFont("helvetica", "normal");
   doc.text("Construction Safety Inspection Report", 15, 23);
 
   // ===== Report Info =====
   doc.setTextColor(0);
 
-  const reportId =
-    "BS-" +
-    Date.now().toString().slice(-6);
+  const reportId = "BS-" + Date.now().toString().slice(-6);
 
   doc.setFontSize(11);
 
-  doc.text(
-    `Report ID : ${reportId}`,
-    15,
-    42
-  );
+  doc.text(`Report ID : ${reportId}`, 15, 42);
+  doc.text(`Generated : ${new Date().toLocaleString()}`, 15, 49);
+  doc.text(`Inspection : ${inspectionType.toUpperCase()}`, 15, 56);
 
-  doc.text(
-    `Generated : ${new Date().toLocaleString()}`,
-    15,
-    49
-  );
-
-  doc.text(
-    `Inspection : ${inspectionType.toUpperCase()}`,
-    15,
-    56
-  );
-
-  // ===== Compliance Box =====
+  // ===== Compliance =====
 
   doc.setFillColor(240, 248, 255);
   doc.roundedRect(15, 65, 180, 28, 4, 4, "F");
@@ -60,75 +48,108 @@ export function generatePDF(result) {
   doc.setFontSize(14);
   doc.setFont("helvetica", "bold");
 
-  doc.text(
-    `Compliance : ${compliance}%`,
-    22,
-    77
-  );
+  doc.text(`Compliance : ${compliance}%`, 22, 77);
+  doc.text(`Risk : ${risk.level.toUpperCase()}`, 125, 77);
+  doc.text(`Score : ${risk.score}/100`, 22, 87);
 
-  doc.text(
-    `Risk : ${risk.level.toUpperCase()}`,
-    125,
-    77
-  );
-
-  doc.text(
-    `Score : ${risk.score}/100`,
-    22,
-    87
-  );
-
-  // ===== Tables =====
+  // ===== Required PPE =====
 
   autoTable(doc, {
     startY: 100,
-
     head: [["Required PPE"]],
-
     body: requiredItems.map((i) => [i]),
-
     theme: "grid",
-
     headStyles: {
       fillColor: [37, 99, 235],
     },
   });
 
+  // ===== Detected PPE =====
+
   autoTable(doc, {
     startY: doc.lastAutoTable.finalY + 10,
-
     head: [["Detected PPE"]],
-
     body: detectedItems.map((i) => [i]),
-
     theme: "grid",
-
     headStyles: {
       fillColor: [34, 197, 94],
     },
   });
 
+  // ===== Missing PPE =====
+
   autoTable(doc, {
     startY: doc.lastAutoTable.finalY + 10,
-
     head: [["Missing PPE"]],
-
     body:
       missingItems.length > 0
         ? missingItems.map((i) => [i])
-        : [["None 🎉"]],
-
+        : [["None"]],
     theme: "grid",
-
     headStyles: {
       fillColor: [239, 68, 68],
     },
   });
 
+  // ===== Executive Summary =====
+
+  const summaryY = doc.lastAutoTable.finalY + 15;
+
+  doc.setFontSize(15);
+  doc.setFont("helvetica", "bold");
+  doc.text("Executive Summary", 15, summaryY);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  doc.text(
+    executiveSummary || "No executive summary available.",
+    15,
+    summaryY + 9,
+    {
+      maxWidth: 180,
+    }
+  );
+
+  // ===== Hazards =====
+
+  const hazardsStartY = summaryY + 25;
+
+  autoTable(doc, {
+    startY: hazardsStartY,
+    head: [["Hazards"]],
+    body:
+      hazards.length > 0
+        ? hazards.map((h) => [h])
+        : [["No hazards detected"]],
+    theme: "grid",
+    headStyles: {
+      fillColor: [239, 68, 68],
+    },
+  });
+
+  // ===== AI Recommendations =====
+
+  autoTable(doc, {
+    startY: doc.lastAutoTable.finalY + 10,
+    head: [["AI Recommendations"]],
+    body:
+      recommendations.length > 0
+        ? recommendations.map((r) => [r])
+        : [["Follow standard PPE safety procedures"]],
+    theme: "grid",
+    headStyles: {
+      fillColor: [34, 197, 94],
+    },
+  });
+
   // ===== Footer =====
 
-  doc.setFontSize(10);
+  if (doc.lastAutoTable.finalY > 255) {
+    doc.addPage();
+  }
 
+  doc.setFontSize(10);
   doc.setTextColor(120);
 
   doc.text(
@@ -137,7 +158,5 @@ export function generatePDF(result) {
     285
   );
 
-  doc.save(
-    `BuildSafe_Report_${reportId}.pdf`
-  );
+  doc.save(`BuildSafe_Report_${reportId}.pdf`);
 }

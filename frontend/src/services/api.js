@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://buildsafe-ai-aprb.onrender.com/api",
+  baseURL: "http://localhost:8000/api",
 });
 
+// Analyze uploaded image
 export const analyzeImage = async (image) => {
   const formData = new FormData();
 
@@ -21,6 +22,17 @@ export const analyzeImage = async (image) => {
   );
 
   return response.data.data;
+};
+
+// Get inspection history
+export const getInspectionHistory = async () => {
+  try {
+    const response = await api.get("/inspection/history");
+    return response.data.data;
+  } catch (error) {
+    console.warn(error);
+    return [];
+  }
 };
 
 export default api;

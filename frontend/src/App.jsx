@@ -4,6 +4,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Dashboard from "./components/dashboard/Dashboard";
 import UploadCard from "./components/UploadCard";
 import ResultCard from "./components/ResultCard";
 import Footer from "./components/Footer";
@@ -48,7 +49,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen scroll-smooth bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white">
-
       {/* Background Glow */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-0 top-20 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl"></div>
@@ -61,6 +61,9 @@ export default function App() {
       <Navbar />
 
       <Hero />
+
+      {/* Live Dashboard */}
+      <Dashboard />
 
       {/* Upload Section */}
       <section
@@ -83,8 +86,10 @@ export default function App() {
         <ResultCard result={result} />
       </section>
 
-      <Footer />
+      {/* Inspection History */}
+    
 
+      <Footer />
     </div>
   );
 }

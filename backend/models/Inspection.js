@@ -23,7 +23,26 @@ const inspectionSchema = new mongoose.Schema(
       score: Number,
     },
 
-    imageName: String,
+    // NEW AI AUDITOR FIELDS
+    hazards: {
+      type: [String],
+      default: [],
+    },
+
+    recommendations: {
+      type: [String],
+      default: [],
+    },
+
+    executiveSummary: {
+      type: String,
+      default: "",
+    },
+
+    imageName: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -1,0 +1,25 @@
+.progress-wrapper{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:10px;
+}
+
+.progress-track{
+    flex:1;
+    height:18px;
+    background:#e2e8f0;
+    border-radius:50px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#22c55e,#16a34a);
+    transition:width .7s ease;
+}
+
+.progress-text{
+    font-weight:700;
+    color:#0f172a;
+}
